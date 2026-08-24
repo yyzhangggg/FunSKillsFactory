@@ -1,5 +1,5 @@
-# travel-memory-sticker-card
-A Codex skill for turning travel photos into collectible memory sticker cards.
+# image-to-sticker
+A Codex skill for turning photos into collectible image-to-sticker cards.
 <img width="1536" height="1024" alt="粉伞街角记忆卡" src="https://github.com/user-attachments/assets/9ae2195d-d355-494a-9716-da6da4104178" />
 <img width="1536" height="1024" alt="IMG_3097_记忆卡片" src="https://github.com/user-attachments/assets/92c9af8a-3789-4e2c-9b3a-1564e9a3a02e" />
 <img width="1536" height="1024" alt="树荫空椅记忆卡" src="https://github.com/user-attachments/assets/b9454a18-7934-45a9-84c0-2c0419fb0418" />

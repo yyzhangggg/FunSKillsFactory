@@ -1,11 +1,11 @@
 ---
-name: travel-memory-sticker-card
-description: Transform a user-uploaded photograph into one horizontal collectible memory card with a large quiet editorial illustration, six integrated journaling-sticker motifs, three small English keywords beneath the left illustration, tactile paper grain, and deliberately clumsy flat color fields. Use when Codex needs to P图, edit, redraw, stylize, or turn a travel, street, landscape, lifestyle, portrait, or pet photo into a minimalist postcard-like card or sticker-card in this visual language. Preserve recognition through one same-medium identification anchor and optionally one exact place-defining landmark text shown once; never retain an unintended photorealistic patch, signature, or watermark.
+name: image-to-sticker
+description: Transform a user-uploaded photograph into one horizontal collectible image-to-sticker card with a large quiet editorial illustration, six integrated journaling-sticker motifs, three small English keywords beneath the left illustration, tactile paper grain, and deliberately clumsy flat color fields. Trigger when the user says "make this iamge a sticker" or "make sticker", or asks to P图, edit, redraw, stylize, or turn a travel, street, landscape, lifestyle, portrait, or pet photo into a minimalist postcard-like sticker card in this visual language. Preserve recognition through one same-medium identification anchor and optionally one exact place-defining landmark text shown once; never retain an unintended photorealistic patch, signature, or watermark.
 ---
 
-# Travel Memory Sticker Card
+# Image to Sticker
 
-Turn one user photo into one finished bitmap memory card. Use the image generation/editing tool; do not simulate the result with filters or code.
+Turn one user photo into one finished bitmap image-to-sticker card. Use the image generation/editing tool; do not simulate the result with filters or code.
 
 ## Workflow
 
