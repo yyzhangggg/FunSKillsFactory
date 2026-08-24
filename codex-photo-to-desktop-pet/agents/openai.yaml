@@ -1,0 +1,4 @@
+interface:
+  display_name: "Photo to Desktop Pet"
+  short_description: "Build a desktop-pet character from multi-view photos."
+  default_prompt: "Use $photo-to-desktop-pet to create a desktop-pet character package from my 3-9 reference photos."
