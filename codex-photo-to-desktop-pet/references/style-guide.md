@@ -24,6 +24,18 @@ Middle Eastern tone and drawing style, using regionally inspired line, shape, co
 
 Highly polished, shining K-pop-inspired styling with luminous highlights, carefully designed hair and clothing details, glossy accents, vivid but controlled color, and a performance-oriented presentation. Keep the character readable at desktop-pet scale and preserve the person's actual identity and selected clothing unless the user requests a redesign.
 
+## Civitai model selection
+
+Use Civitai as the model source for style rendering when a local or connected Civitai-compatible image-generation workflow is available.
+
+- Before generation, query Civitai's current public model rankings or model API and select the highest-rated or most-downloaded SFW checkpoint that matches the requested style and the subject type.
+- Do not use one universal checkpoint for every style. Match the checkpoint's base architecture, supported resolution, and intended medium to the requested style.
+- Record the selected model name, Civitai model URL, version ID, base model, and retrieval date in the asset manifest.
+- Prefer safetensors files and verify the file metadata or hash when downloading a model.
+- Check the model license and permissions before using it in a distributed desktop-pet application. Do not redistribute model weights unless the license permits it.
+- If Civitai cannot be reached, no suitable model is available, or the license is unclear, stop and ask the user before generating styled assets. Do not silently substitute an unrelated model.
+- Use the selected Civitai model for the isolated figure only when it can preserve the source subject. Background removal and identity validation must happen before style generation.
+
 ## Style rules
 
 - Use one style flag at a time. If the user provides multiple style flags, ask them to choose one.

@@ -41,7 +41,7 @@ Available style flags:
 - `-western`: Middle Eastern tone and drawing style
 - `-kpop`: highly polished, shining K-pop-inspired style
 
-Use one style flag at a time. If no style is supplied, choose one before generating styled assets.
+Use one style flag at a time. If no style is supplied, choose one before generating styled assets. When a Civitai-compatible generation workflow is available, the skill checks Civitai's current rankings and selects a style-compatible top-rated or most-downloaded SFW model, recording its model URL, version, base model, license, and retrieval date. It does not force one model across all styles.
 
 ## Installation
 
