@@ -31,7 +31,17 @@ The workflow has two stages:
 1. `make this a pet` or `make my friend pet` creates the character turnaround and action assets for approval.
 2. `make this a desktop pet` builds the runnable desktop-pet application only after the character and actions are approved.
 
-Supported actions include standing, sitting, walking, crawling, jumping, eating, drinking, sleeping, reacting, an exaggerated comic `poop` action, and rare long-cycle `chaos` behavior. Visual tone and style are intentionally left open until selected by the user.
+Supported actions include standing, sitting, walking, crawling, jumping, eating, drinking, sleeping, reacting, an exaggerated comic `poop` action, and rare long-cycle `chaos` behavior.
+
+Available style flags:
+
+- `-pixel`: pixel-art rendering
+- `-manga`: Japanese manga style
+- `-3d`: East Asian ancient fantasy direction
+- `-western`: Middle Eastern tone and drawing style
+- `-kpop`: highly polished, shining K-pop-inspired style
+
+Use one style flag at a time. If no style is supplied, choose one before generating styled assets.
 
 ## Installation
 

@@ -1,6 +1,5 @@
 ---
 name: photo-to-desktop-pet
-description: Create a consistent desktop-pet character package from 3-9 photos of the same person or animal, then build a runnable desktop pet only when the user says "make this a desktop pet". Trigger asset creation with "make this a pet" or "make my friend pet". Prefer front, side, and back references. Preserve identity, clothing for people, natural appearance for animals, and shared food and water bowl props across turnarounds and actions.
 ---
 
 # Photo to Desktop Pet
@@ -19,7 +18,6 @@ Turn 3-9 reference photos of one person or one animal into a consistent desktop-
 `make this a desktop pet` builds the application only after the character turnaround and action assets have been reviewed and approved. If the assets have not been approved, stop and request approval before implementation.
 
 Treat an optional style flag as user input, but leave the tone and visual style unspecified until the user chooses one. Do not invent a default style. Preserve the selected style consistently once the user provides it.
-
 ## Input requirements
 
 - Accept 3-9 photos.
