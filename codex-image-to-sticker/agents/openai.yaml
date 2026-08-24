@@ -1,4 +1,4 @@
 interface:
   display_name: "Image to Sticker"
   short_description: "Turn a photo into a gouache sticker card."
-  default_prompt: "使用 $image-to-sticker 把我上传的照片做成水粉剪纸质感的贴纸卡，左图底部加入三个英文关键词。"
+  default_prompt: "use $image-to-sticker make a gouache sticker card from my uploaded photo, adding three English keywords at the bottom of the left image."
