@@ -31,28 +31,42 @@ Treat an optional style flag as user input, but leave the tone and visual style 
 - If clothing differs across human references, ask which outfit should be locked. Do not change a person's clothing between outputs after it is selected.
 - Do not add clothing to animals unless the user explicitly requests it.
 
-## Phase 1: character package
+## Phase 1: isolate and lock the main figure
+
+This phase must happen before generating the turnaround, props, or action poses.
 
 1. Inspect all references as a multi-view set for one subject.
-2. Identify stable identity anchors: face or head shape, hair or coat pattern, body proportions, ears, tail, markings, footwear, accessories, and selected clothing.
-3. Generate a character sheet with:
+2. Identify the main person or animal and reject images with multiple competing subjects unless the user clearly identifies one subject.
+3. Remove the source background from each usable reference. Keep the complete visible person or animal, including hair, ears, tail, feet, paws, and other silhouette-defining edges. Do not retain scenery, furniture, unrelated people, text, logos, or accidental objects.
+4. Produce an isolated main-figure or main-pet preview on a transparent background. Do not stylize, redesign, crop away important anatomy, or add props at this step.
+5. Inspect the cutout for missing limbs, clipped fur or hair, halos, background fragments, incorrect holes, and identity loss. Repair the mask or request a clearer source image when necessary.
+6. Present the isolated figure preview for user review. Do not continue to the turnaround phase until the main figure is accepted.
+
+The accepted isolated figure is the source of truth for all later work. Preserve its identity anchors, proportions, hair or coat, markings, selected human clothing, and animal appearance.
+
+## Phase 2: character package
+
+Only after the isolated figure is accepted:
+
+1. Identify stable identity anchors: face or head shape, hair or coat pattern, body proportions, ears, tail, markings, footwear, accessories, and selected clothing.
+2. Generate a character sheet with:
    - front view
    - left or right side view
    - opposite side view when references support it
    - back view
    - transparent or neutral background
    - no extra characters, watermark, or unrelated readable text
-4. Include the shared props in the character package:
+3. Include the shared props in the character package:
    - one food bowl
    - one water bowl
-5. Generate key-pose previews before producing animation frames.
-6. Present the turnaround and key poses for review. Treat approved outputs as the character source of truth.
+4. Generate key-pose previews before producing animation frames.
+5. Present the turnaround, props, and key poses for review. Treat approved outputs as the locked character source of truth.
 
 If a view is not present in the references, mark that view as inferred and avoid inventing distinctive details. Ask for more photos when the missing view would materially affect identity or animation.
 
-## Required action set
+## Phase 3: required action set
 
-Create key-pose previews, then fixed animation assets, for these actions:
+Only after the isolated figure and character package are approved, create key-pose previews, then fixed animation assets, for these actions:
 
 - `idle`: quiet standing behavior with subtle movement
 - `stand`: neutral standing pose
@@ -73,7 +87,7 @@ Both people and animals receive the food bowl and water bowl. Keep these props v
 
 ## Asset approval and locking
 
-Do not generate the final animation set until the user approves the turnaround and key-pose previews. After approval, lock the following across every view and frame:
+Do not generate the turnaround until the user approves the isolated main figure. Do not generate the final animation set until the user approves the turnaround, props, and key-pose previews. After each approval gate, lock the following across every view and frame:
 
 - identity anchors
 - silhouette and body proportions
@@ -112,7 +126,7 @@ The behavior system must always have a pause control and must recover to a norma
 
 ## Delivery
 
-For the asset phase, show the character sheet, props, and action key-pose previews, then list which assets are awaiting approval. After approval, show or save the fixed animation assets and manifests.
+For the asset phase, show the isolated main figure first and wait for approval. Then show the character sheet, props, and action key-pose previews, listing which assets are awaiting approval. After approval, show or save the fixed animation assets and manifests.
 
 For the desktop-pet phase, provide the runnable application project or package, the animation manifest, and the local configuration defaults. Mention any platform limitations when a packaged desktop application cannot be produced in the current environment.
 
