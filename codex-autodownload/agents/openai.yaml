@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Auto Download"
+  short_description: "Bulk-download free images from Pixabay and Pexels."
+  default_prompt: "Use $codex-autodownload to download image assets for my requested topics."
