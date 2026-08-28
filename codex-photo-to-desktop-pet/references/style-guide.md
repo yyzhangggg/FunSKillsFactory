@@ -8,6 +8,10 @@ Supported style flags:
 
 Pixel-art desktop-pet rendering with deliberate pixel clusters, a fixed pixel grid, hard edges, limited palette control, and no smoothing or anti-aliasing. Keep every animation frame aligned to the same grid and canvas anchor.
 
+### Draw Things model rule
+
+Automatically enable **Pixel Art XL v1.1** (`pixel-art-xl-v1.1.safetensors`) from [Civitai model 120096](https://civitai.com/models/120096). It is an **SDXL 1.0 LoRA**, so it requires an SDXL base checkpoint in Draw Things; do not apply it to SD 1.5 or Flux checkpoints. Use LoRA weight `0.8-1.0`, disable the refiner, generate at an integer multiple of the final pixel grid, then downscale with nearest-neighbor sampling. Do not rely on the diffusion model to produce final pixel-perfect edges at full resolution.
+
 ## `-manga`
 
 Japanese manga style with expressive ink linework, intentional panel-like visual clarity, manga character proportions, controlled screentone or hatching where appropriate, and Japanese manga-inspired facial and motion conventions. Keep the result as a standalone character or action asset, not a comic page, unless the user asks for panels.
@@ -15,6 +19,10 @@ Japanese manga style with expressive ink linework, intentional panel-like visual
 ## `-3d`
 
 East Asian ancient fantasy style interpreted as a stylized 3D character direction. Use historically inspired East Asian fantasy clothing, motifs, props, materials, and environment cues only when compatible with the person or animal reference. Preserve the subject's identity and do not invent specific historical claims. Keep lighting, materials, camera angle, and proportions consistent across all views and frames.
+
+### Draw Things model rule
+
+Automatically enable **3D Style XL** (`3D XL.safetensors`) from [Civitai model 119303](https://civitai.com/models/119303). It is an **SDXL 1.0 LoRA**, so it requires an SDXL base checkpoint in Draw Things; do not apply it to SD 1.5 or Flux checkpoints. The LoRA has no required trigger word. Start at weight `0.65-0.8`; use `3D render` in the prompt only when a stronger CGI result is needed. Keep denoising low enough to preserve the supplied person or pet identity.
 
 ## `-western`
 
@@ -24,22 +32,18 @@ Middle Eastern tone and drawing style, using regionally inspired line, shape, co
 
 Highly polished, shining K-pop-inspired styling with luminous highlights, carefully designed hair and clothing details, glossy accents, vivid but controlled color, and a performance-oriented presentation. Keep the character readable at desktop-pet scale and preserve the person's actual identity and selected clothing unless the user requests a redesign.
 
-## Civitai model selection
+## Draw Things Model Selection
 
-Use Civitai as the model source for style rendering when a local or connected Civitai-compatible image-generation workflow is available.
-
-- Before generation, query Civitai's current public model rankings or model API and select the highest-rated or most-downloaded SFW checkpoint that matches the requested style and the subject type.
-- Do not use one universal checkpoint for every style. Match the checkpoint's base architecture, supported resolution, and intended medium to the requested style.
-- Record the selected model name, Civitai model URL, version ID, base model, and retrieval date in the asset manifest.
-- Prefer safetensors files and verify the file metadata or hash when downloading a model.
-- Check the model license and permissions before using it in a distributed desktop-pet application. Do not redistribute model weights unless the license permits it.
-- If Civitai cannot be reached, no suitable model is available, or the license is unclear, stop and ask the user before generating styled assets. Do not silently substitute an unrelated model.
-- Use the selected Civitai model for the isolated figure only when it can preserve the source subject. Background removal and identity validation must happen before style generation.
+- `-pixel` and `-3d` are the only flags that automatically select a documented local LoRA.
+- For `-manga`, `-western`, `-kpop`, or no style flag, keep the user's currently selected Draw Things checkpoint and LoRA unchanged. Do not query Civitai, download weights, or substitute another model.
+- Before enabling an automatic LoRA, verify that the active Draw Things checkpoint uses the matching SDXL 1.0 architecture. If it does not, stop and ask the user to switch to an SDXL base checkpoint.
+- Record the selected local LoRA filename, source URL, base architecture, weight, and generation date in the asset manifest.
+- Do not redistribute downloaded model weights. Check the current Civitai license before distributing a desktop-pet application that includes generated assets commercially.
 
 ## Style rules
 
 - Use one style flag at a time. If the user provides multiple style flags, ask them to choose one.
-- If no style flag is provided, ask the user to select a style before generating the styled character package. Do not choose a default.
+- If no style flag is provided, do not choose or change a Draw Things model or LoRA. Use the user's manual local selection and preserve it for the entire package.
 - A style changes rendering direction, not the subject's identity, body structure, clothing decision, animal markings, or action list.
 - Do not mix style directions across the isolated figure, turnaround, props, key poses, animation frames, or application assets.
 - For `-pixel`, preserve integer-grid alignment and disable smoothing.

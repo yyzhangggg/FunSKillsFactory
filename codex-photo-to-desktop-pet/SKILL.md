@@ -18,7 +18,7 @@ Turn 3-9 reference photos of one person or one animal into a consistent desktop-
 
 `make this a desktop pet` builds the application only after the character turnaround and action assets have been reviewed and approved. If the assets have not been approved, stop and request approval before implementation.
 
-Treat an optional style flag as user input. Supported flags are `-pixel`, `-manga`, `-3d`, `-western`, and `-kpop`; read [references/style-guide.md](references/style-guide.md) before generating. Do not invent a default style. Preserve the selected style consistently once the user provides it.
+Treat an optional style flag as user input. Supported flags are `-pixel`, `-manga`, `-3d`, `-western`, and `-kpop`; read [references/style-guide.md](references/style-guide.md) before generating. Use the local Draw Things HTTP service for all diffusion generation. Only `-pixel` and `-3d` select the documented Draw Things LoRA automatically. For every other style, or when no style flag is supplied, do not select or change the local Draw Things model or LoRA: the user controls it manually. Preserve the selected style consistently once the user provides it.
 
 ## Input requirements
 

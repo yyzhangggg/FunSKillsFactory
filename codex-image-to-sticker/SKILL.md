@@ -1,11 +1,29 @@
 ---
-name: image-to-sticker
-description: Transform a user-uploaded photograph into one horizontal collectible image-to-sticker card with a large quiet editorial illustration, six integrated journaling-sticker motifs, three small English keywords beneath the left illustration, tactile paper grain, and deliberately clumsy flat color fields. Trigger when the user says "make this iamge a sticker" or "make sticker", or asks to P图, edit, redraw, stylize, or turn a travel, street, landscape, lifestyle, portrait, or pet photo into a minimalist postcard-like sticker card in this visual language. Preserve recognition through one same-medium identification anchor and optionally one exact place-defining landmark text shown once; never retain an unintended photorealistic patch, signature, or watermark.
+name: travel-memory-sticker-card
+description: Transform a user-uploaded photograph into one horizontal collectible memory card with a large quiet editorial illustration, six integrated journaling-sticker motifs, three small English keywords beneath the left illustration, tactile paper grain, and deliberately clumsy flat color fields. Use when Codex needs to P图, edit, redraw, stylize, or turn a travel, street, landscape, lifestyle, portrait, or pet photo into a minimalist postcard-like card or sticker-card in this visual language. Always drive the local Draw Things diffusion service; do not use OpenAI Image API, imagegen CLI, or another image backend. Preserve recognition through one same-medium identification anchor and optionally one exact place-defining landmark text shown once; never retain an unintended photorealistic patch, signature, or watermark.
 ---
 
-# Image to Sticker
+# Travel Memory Sticker Card
 
-Turn one user photo into one finished bitmap image-to-sticker card. Use the image generation/editing tool; do not simulate the result with filters or code.
+Turn one user photo into one finished bitmap memory card. Always use the user's local Draw Things diffusion service through its local HTTP API, normally `http://127.0.0.1:7860/sdapi/v1/img2img`. Do not use OpenAI Image API, the `imagegen` CLI, remote image services, procedural filters, or code as a substitute for generation. If Draw Things is unavailable, stop and ask the user to start its HTTP server; do not silently switch backends.
+
+Use Draw Things' currently loaded model and settings unless the user explicitly chooses a different local model. Send the source photo as an `img2img` input, preserve the original file, and save the returned bitmap to the requested output directory. Default to the source image's native width and height: submit the original base64 bytes directly, with request `width` and `height` equal to the source dimensions. Never crop or change the aspect ratio. Only when the longest source edge exceeds `2048px`, create a temporary proportional downscaled copy with the longest edge at `2048px` (use `1536px` when the local device needs a lower limit); never create a cropped or lossy project-local input merely to satisfy a card ratio. Delete temporary inputs after the job. Use moderate-to-high denoising for the full matte redraw, but keep the source recognizable. Treat the skill's art direction below as the canonical positive and negative prompt specification for Draw Things.
+
+## Draw Things Generation Contract
+
+- Before generation, probe `GET /sdapi/v1/options` and confirm the local Draw Things service responds.
+- Use `POST /sdapi/v1/img2img` with one source image per job. Send the original raw base64 image data in `init_images`; set request `width` and `height` to the source image's native dimensions. Include the composed prompt, negative prompt, steps, sampler, seed, and `denoising_strength`.
+- Keep prompt content faithful to this skill: matte gouache/cut-paper, broad source-derived shapes, warm paper, exact sticker and keyword counts, and the negative constraints below.
+- After each response, decode the returned image and inspect dimensions, subject recognition, layout, sticker count, keyword count, unwanted text, and watermark absence. Retry once in Draw Things with one targeted prompt change if a quality check fails.
+- Do not claim exact text or object counts are guaranteed by diffusion. If they remain wrong after one retry, report the issue rather than using a different backend.
+
+## Source Preservation and Canvas Policy
+
+- Full source coverage is the default requirement. Preserve every visible source element; do not center-crop or trim portrait, landscape, or square inputs.
+- Native source dimensions are the default Draw Things request dimensions, and the generated result must keep the source aspect ratio. The 3:2 card system describes internal hierarchy, not permission to alter the canvas ratio.
+- If the longest source edge exceeds `2048px`, downscale proportionally to a maximum edge of `2048px`; use `1536px` only when required by local Draw Things memory limits. Preserve every visible source element and record both original and generated dimensions.
+- After generation, optional size restoration may use a non-generative high-quality upscaler only. Use no denoising, redraw, face enhancement, crop, or content synthesis during restoration.
+- If the local device cannot handle the proportional safety downscale, stop and ask; never silently crop, stretch, or return a partial result.
 
 ## Workflow
 
@@ -18,7 +36,7 @@ Turn one user photo into one finished bitmap image-to-sticker card. Use the imag
 
 ## Fixed card system
 
-- Use one 3:2 horizontal canvas on warm off-white uncoated paper with a continuous 4–5% outer margin.
+- Use the source image's original aspect ratio on warm off-white uncoated paper with a continuous 4–5% outer margin. Do not stretch, crop, pad, or force a 3:2 canvas unless the user explicitly overrides the source-preservation policy.
 - Build the left 66–68% as one vertical unit: a large near-square, unframed illustration above a shallow exposed-paper keyword footer. The illustration must rest directly on the card paper with a subtly rough edge: no outline, keyline, mat, inner card, rounded frame, shadow, or sticker edge.
 - Center exactly three short scene-derived English keywords once beneath the illustration, separated by small centered dots: `[keyword 1] · [keyword 2] · [keyword 3]`. Keep them small, quiet, and unboxed. Never place them inside the illustration or below the sticker column.
 - Place exactly six separate die-cut stickers in the right 30–32%, using the full composition height. Make two or three stickers larger and the remainder smaller; stagger them with calm, irregular spacing.
